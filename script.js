@@ -119,7 +119,6 @@ responseNextBtn.addEventListener('click', () => {
         image: data.image,
         question: data.question,
         answer: answer,
-        judgment: selectedJudgment.value,
         difficulty: difficultyInput.value,
         comment: commentInput.value
     });
