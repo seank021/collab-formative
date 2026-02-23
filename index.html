@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formative Study</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Re-entering the discussion</h1>
+        
+        <div id="progress-container">
+            Progress: <span id="current-step">1</span> / <span id="total-steps">5</span>
+        </div>
+
+        <!-- 1st step: Prior Context Screen -->
+        <div id="context-screen" class="hidden">
+            <h2>Prior Context</h2>
+            <div class="context-box">
+                <p id="context-text">Prior context will be displayed here.</p>
+            </div>
+            <p>If you understood the context, please click the button below to start the trial.</p>
+            <button id="start-trial-btn">Start Trial</button>
+        </div>
+
+        <!-- 2nd step: Stimulus Screen (with timer) -->
+        <div id="stimulus-screen" class="hidden">
+            <div id="timer-display">Time Left: 5 seconds</div>
+            <div class="image-container">
+                <img id="target-image" src="" alt="Transcript Image">
+                <div id="stimulus-question">Question will be displayed here.</div>
+            </div>
+            <p>Please read the transcript and try to answer the question within the time limit.</p>
+        </div>
+
+        <!-- 3rd step: Response & Report Screen -->
+        <div id="response-screen" class="hidden">
+            <h2>Your Response</h2>
+            
+            <div class="input-container">
+                
+                <!-- Answer input -->
+                <div class="input-group">
+                    <label for="user-answer">Please enter your answer to the question:</label>
+                    <textarea id="user-answer" rows="3" placeholder="Type your answer here..."></textarea>
+
+                <!-- Judgment input -->
+                <div class="input-group rating-container">
+                    <label for="difficulty-rating">How difficult was it to answer the question based on the provided context and transcript? (1: Very easy, 7: Very difficult)</label>
+                    <input type="range" id="difficulty-rating" min="1" max="7" value="4" step="1">
+                    <div class="range-labels">
+                        <span>1 (Very easy)</span>
+                        <span>4 (Neutral)</span>
+                        <span>7 (Very difficult)</span>
+                    </div>
+                </div>
+
+                <!-- Open-ended comment input -->
+                <div class="input-group">
+                    <label for="user-comment">If you found it difficult to answer, please explain why. What information was missing or unclear?</label>
+                    <textarea id="user-comment" rows="4" placeholder="Type your comments here..."></textarea>
+                </div>
+            </div>
+
+            <button id="next-btn">Submit & Next</button>
+        </div>
+
+        <div id="finish-screen" class="hidden">
+            <h2>Experiment Completed</h2>
+            <p>Please click the button below to download your results. Thank you for participating!</p>
+            <button id="download-btn">Download Results (.csv)</button>
+            <button id="restart-btn" class="secondary">Restart Experiment</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
