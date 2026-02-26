@@ -49,6 +49,26 @@ h1 {
     margin-top: 10px;
 }
 
+#target-image {
+    /* 기존 스타일 유지하거나 숨김 처리 (이미지가 준비되지 않았을 경우) */
+    display: none; 
+}
+
+#transcript-text {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+    white-space: pre-wrap; /* 줄바꿈 유지 */
+    font-family: monospace;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-height: 400px;
+    overflow-y: auto;
+    width: 100%;
+}
+
 #timer-display {
     color: red;
     font-weight: bold;

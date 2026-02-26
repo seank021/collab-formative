@@ -8,15 +8,42 @@
 </head>
 <body>
     <div class="container">
-        <h1>Re-entering the discussion</h1>
+        <h1>Formative Study</h1>
         
         <div id="progress-container" class="hidden">
             Progress: <span id="current-step">1</span> / <span id="total-steps">5</span>
         </div>
 
+        <!-- 0. Welcome Screen -->
+        <div id="welcome-screen" class="screen">
+            <h2>Welcome to the Formative Study</h2>
+            <p>Thank you for participating in our research.</p>
+            
+            <div style="text-align: left; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                <p><b>Study Overview:</b><br>
+                In this experiment, you will review short transcripts from meeting scenarios and answer questions about your interpretation of the situation. This study aims to understand how people understand, re-enter the discussions and figure out the next actions after a brief loss of focus.</p>
+                
+                <p><b>Instructions:</b><br>
+                Please read all instructions and transcripts carefully. There are no right or wrong answers; we are interested in your honest experience and perception.</p>
+
+                <p><b>Duration:</b><br>
+                The entire session is expected to take approximately <b>15-20 minutes</b>.</p>
+
+                <p><b>Compensation:</b><br>
+                You will receive compensation for your participation upon completion. <br>
+                <span style="color: #d9534f;">* Completion: Finish all parts of the experiment, download the results, and send an email to the researcher. (This is guided in the final screen.)</span><br>
+                <span style="color: #d9534f;">* A valid email address is required to process your reward.</span></p>
+
+                <p><b>Contact:</b><br>
+                If you have any questions or encounter technical issues, please contact the researcher at <b>seahn1021@snu.ac.kr</b>.</p>
+            </div>
+
+            <button id="start-welcome-btn" style="margin-top: 30px;">I understand, Start Experiment</button>
+        </div>
+
         <!-- 1. Demographic Information Screen -->
-        <div id="demographic-screen" class="screen">
-            <h2>Welcome</h2>
+        <div id="demographic-screen" class="screen hidden">
+            <h2>Demographic Information</h2>
             <p>Please enter your demographic information.</p>
             <div class="input-container">
                 <div class="input-group">
@@ -26,10 +53,12 @@
                         <button id="generate-id-btn" class="secondary" style="width: auto;">Generate</button>
                     </div>
                 </div>
+                
                 <div class="input-group">
                     <label for="participant-age">Age (International Age(만 나이)):</label>
                     <input type="number" id="participant-age" placeholder="e.g., 25">
                 </div>
+                
                 <div class="input-group">
                     <label for="participant-gender">Gender:</label>
                     <select id="participant-gender">
@@ -39,6 +68,48 @@
                         <option value="prefer-not-to-say">Prefer not to say</option>
                     </select>
                 </div>
+
+                <div class="input-group">
+                    <label for="participant-role">What best describes your primary role or background?</label>
+                    <select id="participant-role">
+                        <option value="">Select...</option>
+                        <option value="student">Student</option>
+                        <option value="software-engineer">Software engineer / developer</option>
+                        <option value="designer">Designer</option>
+                        <option value="pm">Product / project manager</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="text" id="participant-role-other" placeholder="Please specify if 'Other'" style="margin-top: 5px; display: none;">
+                </div>
+
+                <div class="input-group">
+                    <label for="participant-meeting-freq">How frequently do you participate in collaborative meetings?</label>
+                    <select id="participant-meeting-freq">
+                        <option value="">Select...</option>
+                        <option value="less-than-once-month">Less than once a month</option>
+                        <option value="1-3-month">1–3 times a month</option>
+                        <option value="1-2-week">1–2 times a week</option>
+                        <option value="3-5-week">3–5 times a week</option>
+                        <option value="almost-daily">Almost daily</option>
+                    </select>
+                </div>
+
+                <div class="input-group rating-container">
+                    <label for="participant-lang-comfort">How comfortable are you participating in meetings conducted in English? (1-7)</label>
+                    <input type="range" id="participant-lang-comfort" min="1" max="7" value="4" step="1">
+                    <div class="range-labels">
+                        <span>1 (Not comfortable)</span>
+                        <span>4</span>
+                        <span>7 (Very comfortable)</span>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="participant-email">Email Address (optional; for compensation and follow-up (if needed))</label>
+                    <input type="email" id="participant-email" placeholder="example@email.com" style="width: 100%; padding: 8px;">
+                </div>
+
             </div>
             <button id="to-background-btn">Next</button>
         </div>
@@ -48,10 +119,58 @@
             <h2>Background Information</h2>
             <p>Please answer a few questions about your background.</p>
             <div class="input-container">
+                
                 <div class="input-group">
-                    <label for="participant-tools">What AI tools do you use when doing real-time meetings?</label>
-                    <textarea id="participant-tools" rows="3" placeholder="I use..."></textarea>
+                    <label for="bg-ai-usage">How often do you use AI tools (e.g., AI notetakers) during meetings?</label>
+                    <select id="bg-ai-usage">
+                        <option value="">Select...</option>
+                        <option value="never">Never</option>
+                        <option value="rarely">Rarely</option>
+                        <option value="sometimes">Sometimes</option>
+                        <option value="often">Often</option>
+                        <option value="almost-every-meeting">Almost every meeting</option>
+                    </select>
                 </div>
+
+                <div class="input-group">
+                    <label>For what purposes do you typically use AI tools in meetings? (Select all that apply)</label>
+                    <div class="checkbox-group" style="display: flex; flex-direction: column; gap: 5px; align-items: flex-start;">
+                        <label><input type="checkbox" name="bg-ai-purpose" value="transcription"> Transcription</label>
+                        <label><input type="checkbox" name="bg-ai-purpose" value="meeting-summary"> Meeting summary</label>
+                        <label><input type="checkbox" name="bg-ai-purpose" value="action-items"> Action items / to-dos</label>
+                        <label><input type="checkbox" name="bg-ai-purpose" value="catching-up"> Catching up after missing parts of a meeting</label>
+                        <label><input type="checkbox" name="bg-ai-purpose" value="sharing-notes"> Sharing notes with others</label>
+                        <label><input type="checkbox" name="bg-ai-purpose" value="not-use"> I do not use AI tools</label>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="bg-reentry-exp">Have you ever experienced difficulty re-entering a discussion after briefly losing focus during a meeting?</label>
+                    <select id="bg-reentry-exp">
+                        <option value="">Select...</option>
+                        <option value="never">Never</option>
+                        <option value="rarely">Rarely</option>
+                        <option value="sometimes">Sometimes</option>
+                        <option value="often">Often</option>
+                        <option value="very-often">Very often</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="bg-reentry-strategy">When you lose track of a discussion, what do you usually do to catch up?</label>
+                    <textarea id="bg-reentry-strategy" rows="3" placeholder="e.g., skim transcripts, ask someone, stay silent, rely on intuition, etc."></textarea>
+                </div>
+
+                <div class="input-group rating-container">
+                    <label for="bg-speaking-conf">In general, how confident are you about speaking up in meetings when you feel slightly unsure about the discussion? (1-7)</label>
+                    <input type="range" id="bg-speaking-conf" min="1" max="7" value="4" step="1">
+                    <div class="range-labels">
+                        <span>1 (Not confident)</span>
+                        <span>4</span>
+                        <span>7 (Very confident)</span>
+                    </div>
+                </div>
+
             </div>
             <button id="start-experiment-btn">OK to proceed</button>
         </div>
@@ -59,21 +178,23 @@
         <!-- 3. Prior Context Screen -->
         <div id="context-screen" class="screen hidden">
             <h2>Prior Context</h2>
+            <p>If you understood the context, please click the button below to start the trial.</p>
             <div class="context-box">
                 <p id="context-text">Prior context will be displayed here.</p>
             </div>
-            <p>If you understood the context, please click the button below to start the trial.</p>
             <button id="start-trial-btn">Start Trial</button>
         </div>
 
         <!-- 4. Stimulus Screen (with timer) -->
         <div id="stimulus-screen" class="screen hidden">
-            <div id="timer-display">Time Left: 5 seconds</div>
+            <p>Please read the transcript carefully.</p>
+            <div id="timer-display">Time Left: 30 seconds</div>
             <div class="image-container">
+                <!-- 이미지 대신 텍스트로 트랜스크립트를 보여주기 위해 태그 추가 -->
+                <div id="transcript-text"></div>
+                <!-- 이미지는 일단 숨김 처리 (CSS에서 display:none) -->
                 <img id="target-image" src="" alt="Transcript Image">
-                <div id="stimulus-question">Question will be displayed here.</div>
             </div>
-            <p>Please read the transcript and try to answer the question within the time limit.</p>
         </div>
 
         <!-- 5. Response & Report Screen -->
@@ -82,26 +203,64 @@
             
             <div class="input-container">
                 
-                <!-- Answer input -->
+                <!-- Q1 Input -->
                 <div class="input-group">
-                    <label for="user-answer">Please enter your answer to the question:</label>
-                    <textarea id="user-answer" rows="3" placeholder="Type your answer here..."></textarea>
+                    <label id="label-q1" for="user-answer-q1">Q1. Interpretability (DG1)</label>
+                    <textarea id="user-answer-q1" rows="3" placeholder="Type your answer here..."></textarea>
                 </div>
 
-                <!-- Judgment input -->
+                <!-- Q2 Input -->
+                <div class="input-group">
+                    <label id="label-q2" for="user-answer-q2">Q2. Re-entry (DG2)</label>
+                    <textarea id="user-answer-q2" rows="3" placeholder="Type your answer here..."></textarea>
+                </div>
+
+                <!-- Q3 Input -->
+                <div class="input-group">
+                    <label id="label-q3" for="user-answer-q3">Q3. Actionability (DG3)</label>
+                    <textarea id="user-answer-q3" rows="3" placeholder="Type your answer here..."></textarea>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
+                <!-- Likert L1 -->
                 <div class="input-group rating-container">
-                    <label for="difficulty-rating">How difficult was it to answer the question based on the provided context and transcript? (1: Very easy, 7: Very difficult)</label>
-                    <input type="range" id="difficulty-rating" min="1" max="7" value="4" step="1">
+                    <label>L1. How easy was it to understand the current alignment of the discussion? (1: Very difficult, 7: Very easy)</label>
+                    <input type="range" id="likert-l1" min="1" max="7" value="4" step="1">
                     <div class="range-labels">
-                        <span>1 (Very easy)</span>
+                        <span>1 (Very difficult)</span>
                         <span>4 (Neutral)</span>
-                        <span>7 (Very difficult)</span>
+                        <span>7 (Very easy)</span>
                     </div>
                 </div>
 
+                <!-- Likert L2 -->
+                <div class="input-group rating-container">
+                    <label>L2. How confident are you that you could participate meaningfully right now? (1: Not confident at all, 7: Very confident)</label>
+                    <input type="range" id="likert-l2" min="1" max="7" value="4" step="1">
+                    <div class="range-labels">
+                        <span>1 (Not confident)</span>
+                        <span>4 (Neutral)</span>
+                        <span>7 (Very confident)</span>
+                    </div>
+                </div>
+
+                <!-- Likert L3 -->
+                <div class="input-group rating-container">
+                    <label>L3. How clear was the next step needed to move the discussion forward? (1: Very unclear, 7: Very clear)</label>
+                    <input type="range" id="likert-l3" min="1" max="7" value="4" step="1">
+                    <div class="range-labels">
+                        <span>1 (Very unclear)</span>
+                        <span>4 (Neutral)</span>
+                        <span>7 (Very clear)</span>
+                    </div>
+                </div>
+
+                <hr style="margin: 30px 0; border: 0; border-top: 1px solid #eee;">
+
                 <!-- Open-ended comment input -->
                 <div class="input-group">
-                    <label for="user-comment">If you found it difficult to answer, please explain why. What information was missing or unclear?</label>
+                    <label for="user-comment">Open-ended: If you found any part difficult, what information was missing or unclear?</label>
                     <textarea id="user-comment" rows="4" placeholder="Type your comments here..."></textarea>
                 </div>
             </div>
@@ -112,9 +271,23 @@
         <!-- 6. Finish Screen -->
         <div id="finish-screen" class="screen hidden">
             <h2>Experiment Completed</h2>
-            <p>Please click the button below to download your results. Thank you for participating!</p>
-            <button id="download-btn">Download Results (.csv)</button>
-            <button id="restart-btn" class="secondary">Restart Experiment</button>
+            <p>Thank you for your participation!</p>
+            <p>Please follow these two steps:</p>
+            <ol style="text-align: left; max-width: 400px; margin: 0 auto 20px auto; padding-left: 20px;">
+                <li style="margin-bottom: 10px;">Click <b>"1. Download Results"</b> to save the CSV file.</li>
+                <li>Click <b>"2. Send Email"</b> to open your email client.<br>
+                    <span style="color: #666; font-size: 0.9em;">(Don't forget to attach the downloaded file!)</span>
+                </li>
+            </ol>
+            
+            <div style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <button id="download-btn" style="width: 250px;">1. Download Results (CSV)</button>
+                <button id="email-btn" style="width: 250px;">2. Send Email to Researcher</button>
+                
+                <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
+                
+                <button id="restart-btn" style="background-color: #666; width: auto;">Restart Experiment</button>
+            </div>
         </div>
     </div>
 
