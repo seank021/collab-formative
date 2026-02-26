@@ -10,12 +10,54 @@
     <div class="container">
         <h1>Re-entering the discussion</h1>
         
-        <div id="progress-container">
+        <div id="progress-container" class="hidden">
             Progress: <span id="current-step">1</span> / <span id="total-steps">5</span>
         </div>
 
-        <!-- 1st step: Prior Context Screen -->
-        <div id="context-screen" class="hidden">
+        <!-- 1. Demographic Information Screen -->
+        <div id="demographic-screen" class="screen">
+            <h2>Welcome</h2>
+            <p>Please enter your demographic information.</p>
+            <div class="input-container">
+                <div class="input-group">
+                    <label for="participant-id">Participant ID (randomly assigned):</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="participant-id" placeholder="Enter ID">
+                        <button id="generate-id-btn" class="secondary" style="width: auto;">Generate</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="participant-age">Age (International Age(만 나이)):</label>
+                    <input type="number" id="participant-age" placeholder="e.g., 25">
+                </div>
+                <div class="input-group">
+                    <label for="participant-gender">Gender:</label>
+                    <select id="participant-gender">
+                        <option value="">Select...</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+            <button id="to-background-btn">Next</button>
+        </div>
+
+        <!-- 2. Background Information Screen -->
+        <div id="background-screen" class="screen hidden">
+            <h2>Background Information</h2>
+            <p>Please answer a few questions about your background.</p>
+            <div class="input-container">
+                <div class="input-group">
+                    <label for="participant-tools">What AI tools do you use when doing real-time meetings?</label>
+                    <textarea id="participant-tools" rows="3" placeholder="I use..."></textarea>
+                </div>
+            </div>
+            <button id="start-experiment-btn">OK to proceed</button>
+        </div>
+
+        <!-- 3. Prior Context Screen -->
+        <div id="context-screen" class="screen hidden">
             <h2>Prior Context</h2>
             <div class="context-box">
                 <p id="context-text">Prior context will be displayed here.</p>
@@ -24,8 +66,8 @@
             <button id="start-trial-btn">Start Trial</button>
         </div>
 
-        <!-- 2nd step: Stimulus Screen (with timer) -->
-        <div id="stimulus-screen" class="hidden">
+        <!-- 4. Stimulus Screen (with timer) -->
+        <div id="stimulus-screen" class="screen hidden">
             <div id="timer-display">Time Left: 5 seconds</div>
             <div class="image-container">
                 <img id="target-image" src="" alt="Transcript Image">
@@ -34,8 +76,8 @@
             <p>Please read the transcript and try to answer the question within the time limit.</p>
         </div>
 
-        <!-- 3rd step: Response & Report Screen -->
-        <div id="response-screen" class="hidden">
+        <!-- 5. Response & Report Screen -->
+        <div id="response-screen" class="screen hidden">
             <h2>Your Response</h2>
             
             <div class="input-container">
@@ -44,6 +86,7 @@
                 <div class="input-group">
                     <label for="user-answer">Please enter your answer to the question:</label>
                     <textarea id="user-answer" rows="3" placeholder="Type your answer here..."></textarea>
+                </div>
 
                 <!-- Judgment input -->
                 <div class="input-group rating-container">
@@ -66,7 +109,8 @@
             <button id="next-btn">Submit & Next</button>
         </div>
 
-        <div id="finish-screen" class="hidden">
+        <!-- 6. Finish Screen -->
+        <div id="finish-screen" class="screen hidden">
             <h2>Experiment Completed</h2>
             <p>Please click the button below to download your results. Thank you for participating!</p>
             <button id="download-btn">Download Results (.csv)</button>

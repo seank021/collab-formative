@@ -100,6 +100,22 @@ h1 {
     color: #555;
 }
 
+.input-group input[type="text"],
+.input-group input[type="number"],
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Important for padding */
+}
+
+.input-group textarea {
+    resize: vertical;
+}
+
 .options label {
     font-weight: normal;
     margin-right: 15px;

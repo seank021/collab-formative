@@ -1,4 +1,4 @@
-const experimentData = [
+window.experimentData = [
     {
         context: "Prior context placeholder: ~~~",
         image: "https://via.placeholder.com/600x400?text=Transcript+1",
